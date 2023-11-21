@@ -16,11 +16,13 @@ int main(void)
     // Serial Setup
     UART::init();
 
+    const char* test = "testing haha";
+
     while (true)
     {
-        UART::send('c');
-        PORTB ^= (1 << PB5);
-        _delay_ms(1000);
+        char* out = UART::recieveStr(10);
+        UART::send('\n');
+        UART::send(out);
     }
 
     return -1;

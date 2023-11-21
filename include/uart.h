@@ -4,6 +4,8 @@
 namespace UART
 {
     void init();
-    char recieve();
-    void send(char ch);
+    void send(const char ch);
+    void send(const char *ch);
+    char recieveChar();
+    char* recieveStr(unsigned int max_size);
 }

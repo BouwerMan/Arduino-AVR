@@ -4,6 +4,8 @@
 
 #include "uart.h"
 
+#define ECHO true
+
 namespace UART 
 {
     void init()
@@ -18,16 +20,37 @@ namespace UART
                                  // one stop bit , 8 data bits
     }
 
-    void send(char ch)
+    void send(const char ch)
     {
+        // wait for empty transmit buffer
         while (( UCSR0A & (1 << UDRE0 )) == 0);
         UDR0 = ch;
     }
 
-    char recieve()
+    void send(const char *str)
+    {
+        const char *data = str;
+        while(*data) send(*data++);
+    }
+
+    char recieveChar()
     {
         while ( !(UCSR0A & (1 << RXC0)) );
-        char ch = UDR0;
-        return ch;
+        return UDR0;
+    }
+    char* recieveStr(unsigned int maxSize)
+    {
+        char *str;
+        char ch;
+        
+        for(unsigned int i = 0; i < maxSize; i++)
+        {
+            ch = recieveChar();
+            if((ch == 0x0A) || (ch == 0x0D) || (ch == 0x00)) return str;
+            str[i] = ch;
+            // Debug echo
+            //send(ch);
+        }
+        return 0;
     }
 }
