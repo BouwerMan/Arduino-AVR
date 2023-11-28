@@ -1,0 +1,21 @@
+{
+	"folders": [
+		{
+			"name": "Arduino",
+			"path": ".."
+		},
+		{
+			"name": "Arduino-C",
+			"path": "../../Arduino-C"
+		}
+	],
+	"settings": {
+		"editor.tabSize": 4,
+		"files.associations": {
+			"delay.h": "c",
+			"io.h": "c",
+			"uart.h": "c",
+			"stdint.h": "c"
+		}
+	}
+}

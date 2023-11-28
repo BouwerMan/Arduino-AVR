@@ -1,11 +1,13 @@
-#define BAUD 9600
-#define UBRR (((F_CPU / (16UL * BAUD))) - 1)
+#ifndef UART_H_
+#define UART_H_
 
-namespace UART
-{
-    void init();
-    void send(const char ch);
-    void send(const char *ch);
-    char recieveChar();
-    char* recieveStr(unsigned int max_size);
-}
+#include <avr/io.h>
+#include <stdint.h>
+
+void uart_init();
+void uart_send_char(char ch);
+void uart_send_str(char* msg);
+void uart_send_uint(uint8_t num);
+void uart_printf(const char* format, ...);
+
+#endif // UART_H_
